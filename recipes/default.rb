@@ -25,7 +25,7 @@ node['deploy'].each do |app_name, deploy_config|
 	# TODO: a way to override when something else like config changes require assets
 	# TODO: to be recompiled.)
 
-	rails_env = deploy[:rails_env]
+	rails_env = deploy_config[:rails_env]
 	Chef::Log.info("Precompiling Rails assets with environment #{rails_env}")
 
 	app_dir               = "#{deploy_config['deploy_to']}/current"
