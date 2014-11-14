@@ -43,7 +43,7 @@ node['deploy'].each do |app_name, deploy_config|
 
 	# create a link to the shared assets directory
 	link "#{app_dir}/public/assets" do
-		to shared_secrets_dir
+		to app_shared_assets_dir
 		owner deploy_config[:user]
 		group deploy_config[:group]
 	end
