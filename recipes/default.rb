@@ -18,36 +18,56 @@
 #
 node['deploy'].each do |app_name, deploy_config|
 
-	# TODO: We could make deploys much faster in cases where the assets don't change by
-	# TODO: running a diff between last version deployed and this version deployed and
-	# TODO: checking if any files changed in the app/assets directory. If nothing has
-	# TODO: changed, then no need to run the precompile steps (should still provide
-	# TODO: a way to override when something else like config changes require assets
-	# TODO: to be recompiled.)
-
 	rails_env = deploy_config[:rails_env]
 	Chef::Log.info("Precompiling Rails assets with environment #{rails_env}")
 
-	app_dir               = "#{deploy_config['deploy_to']}/current"
-	app_shared_dir        = "#{deploy_config['deploy_to']}/shared"
-	app_shared_assets_dir = "#{app_shared_dir}/assets"
+	app_dir    = "#{deploy_config['deploy_to']}/current"
+	assets_dir = "#{app_dir}/public/assets"
 
-	# make sure the app shared assets directory exists
-	directory app_shared_assets_dir do
+	# make sure the assets directory exists
+	directory assets_dir do
 		owner deploy_config[:user]
 		group deploy_config[:group]
 		mode 0770
 		action :create
 		recursive true
-	end
+  end
 
-	# create a link to the shared assets directory
-	link "#{app_dir}/public/assets" do
-		to app_shared_assets_dir
-		owner deploy_config[:user]
-		group deploy_config[:group]
-	end
+  # install node-packages
+  #
+  execute 'npm install' do
+    cwd app_dir
+    user deploy_config[:user]
+    command 'npm install'
+    environment 'NODE_ENV' => rails_env
+  end
 
+  # install bower-packages
+  #
+  if (rails_env == 'production' || rails_env == 'staging')
+    bower_install_flags = '-p'
+  end
+  execute 'bower install' do
+    cwd app_dir
+    user deploy_config[:user]
+    command 'node_modules/bin/bower/bin/bower install #{bower_install_flags}'
+  end
+
+  # build assets outside rails asset pipeline
+  #
+  if (rails_env == 'production' || rails_env == 'staging')
+    gulp_build_target = 'build:production'
+  else
+    gulp_build_target = 'build:development'
+  end
+  execute 'gulp build:production' do
+    cwd app_dir
+    user deploy_config[:user]
+    command 'node_modules/gulp/bin/gulp.js '
+  end
+
+  # build assets inside rails asset pipeline
+  #
 	execute 'rake assets:precompile' do
 		cwd app_dir
 		user deploy_config[:user]
