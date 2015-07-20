@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2bb7f6cc-a9e8-400f-a75f-acca547aed01" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recipes/default.rb" afterPath="$PROJECT_DIR$/recipes/default.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/opsworks_precompile_assets.iml" afterPath="$PROJECT_DIR$/.idea/opsworks_precompile_assets.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opsworks_precompile_assets.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +27,7 @@
       <file leaf-file-name="default.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/recipes/default.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.030898876">
+            <state vertical-scroll-proportion="0.2">
               <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
               <folding />
             </state>
@@ -81,8 +79,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="289" />
-    <option name="y" value="55" />
+    <option name="x" value="358" />
+    <option name="y" value="39" />
     <option name="width" value="1124" />
     <option name="height" value="860" />
   </component>
@@ -177,7 +175,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="289" y="55" width="1124" height="860" extended-state="0" />
+    <frame x="358" y="39" width="1124" height="860" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -285,7 +283,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/recipes/default.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.030898876">
+        <state vertical-scroll-proportion="0.2">
           <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
           <folding />
         </state>

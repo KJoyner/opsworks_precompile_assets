@@ -39,7 +39,7 @@ node['deploy'].each do |app_name, deploy_config|
     cwd app_dir
     user deploy_config[:user]
     command 'npm install'
-    environment 'NODE_ENV' => rails_env
+    environment( {'NODE_ENV' => rails_env, 'HOME' => '/home/deploy' } )
   end
 
   # install bower-packages
