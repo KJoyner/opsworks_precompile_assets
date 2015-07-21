@@ -65,6 +65,7 @@ node['deploy'].each do |app_name, deploy_config|
     cwd app_dir
     user deploy_config[:user]
     command "node_modules/gulp/bin/gulp.js #{gulp_build_target}"
+    environment 'HOME' => '/home/deploy'
   end
 
   # build assets inside rails asset pipeline
