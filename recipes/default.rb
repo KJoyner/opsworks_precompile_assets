@@ -47,6 +47,24 @@ node['deploy'].each do |app_name, deploy_config|
     environment( {'NODE_ENV' => rails_env, 'HOME' => '/home/deploy' } )
   end
 
+  # install node-packages
+  #
+  execute 'npm install' do
+    cwd app_dir
+    user deploy_config[:user]
+    command 'npm install'
+    environment( {'NODE_ENV' => rails_env, 'HOME' => '/home/deploy' } )
+  end
+
+  # install typescript definition files
+  execute 'tsd install' do
+    cwd app_dir
+    user deploy_config[:user]
+    command 'node_modules/tsd/build/cli.js install'
+    environment 'HOME' => '/home/deploy'
+  end
+
+
   # install bower-packages
   #
   if (rails_env == 'production' || rails_env == 'staging')
