@@ -50,7 +50,7 @@ node['deploy'].each do |app_name, deploy_config|
   execute 'bower install' do
     cwd app_dir
     user deploy_config[:user]
-    command 'node_modules/bower/bin/bower install #{bower_install_flags}'
+    command "node_modules/bower/bin/bower install #{bower_install_flags}"
   end
 
   # build assets outside rails asset pipeline
@@ -63,7 +63,7 @@ node['deploy'].each do |app_name, deploy_config|
   execute 'gulp build:production' do
     cwd app_dir
     user deploy_config[:user]
-    command 'node_modules/gulp/bin/gulp.js '
+    command "node_modules/gulp/bin/gulp.js #{gulp_build_target}"
   end
 
   # build assets inside rails asset pipeline
