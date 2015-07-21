@@ -51,6 +51,7 @@ node['deploy'].each do |app_name, deploy_config|
     cwd app_dir
     user deploy_config[:user]
     command "node_modules/bower/bin/bower install #{bower_install_flags}"
+    environment 'HOME' => '/home/deploy'
   end
 
   # build assets outside rails asset pipeline
