@@ -33,6 +33,11 @@ node['deploy'].each do |app_name, deploy_config|
 		recursive true
   end
 
+  # make sure we are using the latest version of npm
+  execute 'npm update' do
+    command 'npm update -g update'
+  end
+
   # install node-packages
   #
   execute 'npm install' do
